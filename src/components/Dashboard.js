@@ -376,7 +376,7 @@ function Dashboard() {
         </Grid>
         <Grid item xs={6}>
           <Paper className={classes.paper}>
-            <Piechart title="Source Comparison" data={state.pageData} />
+            <Doughnout title="Source Comparison" data={state.pageData} />
           </Paper>
         </Grid>
       </Grid>
