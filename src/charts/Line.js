@@ -19,7 +19,7 @@ function Line({ data }) {
 
   const chartConfigs = {
     type: "line", // The chart type
-    width: "700", // Width of the chart
+    width: "100%", // Width of the chart
     height: "400", // Height of the chart
     dataFormat: "json", // Data type
     dataSource: {
