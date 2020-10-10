@@ -48,16 +48,83 @@ function Dashboard() {
   const [state, setState] = useState({
     items: [],
     dropdownOptions: [],
-    dataSource: [],
-    usersArr: [],
-    selectedValue: null,
-    organicSource: null,
-    socialSource: null,
-    directSource: null,
-    refferalSource: null,
-    pageViews: null,
-    users: null,
-    newUsers: null,
+    otherData: [
+      {
+        label: "No. of sessions per user",
+        value: 3,
+      },
+      {
+        label: "Page per session",
+
+        value: 8,
+      },
+      {
+        label: "Average session time",
+        value: 13,
+      },
+      {
+        label: "bounce rate",
+
+        value: 26,
+      },
+    ],
+    pageData: [
+      {
+        label: "page views",
+        value: 221040,
+      },
+      {
+        label: "email source",
+
+        value: 1,
+      },
+      {
+        label: "sessions",
+
+        value: 27134,
+      },
+    ],
+    dataSource: [
+      {
+        label: "oraganic",
+        value: 3537,
+      },
+      {
+        label: "direct",
+
+        value: 2961,
+      },
+      {
+        label: "referral",
+
+        value: 2469,
+      },
+      {
+        label: "social source",
+
+        value: 1994,
+      },
+    ],
+    usersArr: [
+      {
+        label: "Users",
+
+        value: 8272,
+      },
+      {
+        label: "New Users",
+
+        value: 7065,
+      },
+    ],
+    selectedValue: "Jan 2018",
+    organicSource: 3537,
+    socialSource: 1994,
+    directSource: 2961,
+    refferalSource: 2469,
+    pageViews: 221040,
+    users: 8272,
+    newUsers: 7065,
   });
 
   const getData = (arg) => {
@@ -72,6 +139,8 @@ function Dashboard() {
     let newUsers = 0;
     let dataSource = [];
     let usersArr = [];
+    let pageData = [];
+    let otherData = [];
 
     let selectedValue = null;
 
@@ -119,6 +188,42 @@ function Dashboard() {
             value: arr[i].new_users,
           }
         );
+        pageData.push(
+          {
+            label: "page views",
+            value: arr[i].page_views,
+          },
+          {
+            label: "email source",
+
+            value: arr[i].email_source,
+          },
+          {
+            label: "sessions",
+
+            value: arr[i].sessions,
+          }
+        );
+        otherData.push(
+          {
+            label: "No. of sessions per user",
+            value: arr[i].number_of_sessions_per_users,
+          },
+          {
+            label: "Page per session",
+
+            value: arr[i].page_per_session,
+          },
+          {
+            label: "Average session time",
+            value: arr[i].avg_session_time,
+          },
+          {
+            label: "bounce rate",
+
+            value: arr[i].bounce_rate,
+          }
+        );
       }
     }
     selectedValue = arg;
@@ -133,6 +238,8 @@ function Dashboard() {
       newUsers,
       dataSource,
       usersArr,
+      pageData,
+      otherData,
     }));
   };
 
@@ -167,7 +274,7 @@ function Dashboard() {
           ...prevState,
           items: rows,
           dropdownOptions: dropdownOptions,
-          selectedValue: "Feb 2018",
+          selectedValue: "Jan 2018",
         }));
       });
   }, [setState]);
@@ -198,7 +305,6 @@ function Dashboard() {
         </Grid>
         <Grid item xs={12} sm={4}>
           <Paper className={classes.paper}>
-            {" "}
             <Card1
               title="Organic Source"
               value={state.organicSource}
@@ -222,6 +328,11 @@ function Dashboard() {
               value={state.refferalSource}
               description="Hey There Whats Up"
             />
+          </Paper>
+        </Grid>
+        <Grid item xs={12}>
+          <Paper className={classes.paper}>
+            <Line title="Data Comparison" data={state.otherData} />
           </Paper>
         </Grid>
         <Grid item xs={12} sm={4}>
@@ -265,7 +376,7 @@ function Dashboard() {
         </Grid>
         <Grid item xs={6}>
           <Paper className={classes.paper}>
-            <Piechart title="Source Comparison" data={state.usersArr} />
+            <Piechart title="Source Comparison" data={state.pageData} />
           </Paper>
         </Grid>
       </Grid>
